@@ -1,7 +1,12 @@
 {
-  "version": 1,
   "cashIcons": [],
-  "creditIcons": [
-    { "name": "助学贷款", "pinyin": "sys.symbol.graduation_cap" }
+  "creditIcons": [],
+  "presets": [
+    {
+      "group": "充值",
+      "accounts": [
+        { "name": "饭卡", "icon": "svg:https://raw.githubusercontent.com/lttwan/zhangliang-config/main/icons/fanka.svg", "type": 0 }
+      ]
+    }
   ]
 }
