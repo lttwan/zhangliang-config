@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "presets": [
     { "name": "饭卡", "pinyin": "fanka", "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/fanka.svg", "type": 0, "group": "充值" },
     { "name": "测试", "pinyin": "paomo", "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/paomo.svg", "type": 0 },
