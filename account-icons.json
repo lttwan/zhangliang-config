@@ -2,11 +2,6 @@
   "cashIcons": [],
   "creditIcons": [],
   "presets": [
-    {
-      "group": "充值",
-      "accounts": [
-        { "name": "饭卡", "icon": "svg:https://raw.githubusercontent.com/lttwan/zhangliang-config/main/icons/fanka.svg", "type": 0 }
-      ]
-    }
+    { "name": "饭卡", "pinyin": "fanka", "icon": "svg:https://raw.githubusercontent.com/lttwan/zhangliang-config/main/icons/fanka.svg", "type": 0, "group": "充值" }
   ]
 }
