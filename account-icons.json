@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "cashIcons": [],
+  "creditIcons": [
+    { "name": "助学贷款", "pinyin": "sys.symbol.graduation_cap" }
+  ]
+}
