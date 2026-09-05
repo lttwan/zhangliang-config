@@ -1,0 +1,4 @@
+{
+  "version": 1,
+  "prompt": "解析记账为JSON。当前{now}。\n参考 支出:{expense} 收入:{income} 账户:{accounts} 标记:不计收支/不计预算/需报销\n字段:type(0支出1收入2转账) amount(数字) category(优先从参考中选,子分类用\"父/子\",无合适则自拟,转账留空) account from_account to_account(转账出入方,还款也是转账) date(YYYY-MM-DD HH:mm,未提及空) no_stat no_budget reimbursed(1或0) note\n只返回JSON。"
+}
