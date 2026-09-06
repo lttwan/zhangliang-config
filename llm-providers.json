@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "providers": [
+    {
+      "name": "DeepSeek",
+      "endpoint": "https://api.deepseek.com/v1/chat/completions",
+      "models": ["deepseek-chat", "deepseek-reasoner", "deepseek-v4-flash", "deepseek-v4-pro", "deepseek-v4-flash-vision-exp"]
+    },
+    {
+      "name": "通义千问",
+      "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+      "models": ["qwen-plus", "qwen-turbo", "qwen-max", "qwen-long", "qwen3.8-max", "qwen3.7-plus", "qwen3.8-flash"]
+    },
+    {
+      "name": "豆包",
+      "endpoint": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "models": ["doubao-seed-1-6-250615", "doubao-1-5-pro-32k-250115", "doubao-1-5-lite-32k-250115", "doubao-pro-32k-241215", "doubao-vision-pro-32k-250115"]
+    },
+    {
+      "name": "Kimi",
+      "endpoint": "https://api.moonshot.cn/v1/chat/completions",
+      "models": ["kimi-k3", "kimi-k2.6", "kimi-k2.7-code-highspeed"]
+    },
+    {
+      "name": "智谱GLM",
+      "endpoint": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+      "models": ["glm-4-flash", "glm-4-flashx", "glm-4", "glm-4-long", "glm-4v-flash", "glm-4v"]
+    },
+    {
+      "name": "硅基流动",
+      "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+      "models": ["Qwen/Qwen2.5-7B-Instruct", "Qwen/Qwen2.5-72B-Instruct", "Qwen/Qwen3.6-27B", "deepseek-ai/DeepSeek-V3.2", "deepseek-ai/DeepSeek-R1", "Pro/moonshotai/Kimi-K2.6", "Pro/zai-org/GLM-5.1"]
+    },
+    {
+      "name": "OpenAI",
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "models": ["gpt-4o-mini", "gpt-4o", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "o3-mini", "o4-mini"]
+    }
+  ]
+}
