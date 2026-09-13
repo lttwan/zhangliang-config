@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "presets": [
     {
       "name": "电费",
@@ -19,6 +19,13 @@
       "name": "储值卡",
       "pinyin": "chuzhika",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/chuzhika.svg",
+      "type": 0,
+      "group": "充值帐户"
+    },
+    {
+      "name": "押金",
+      "pinyin": "yajin",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/yajin.svg",
       "type": 0,
       "group": "充值帐户"
     }
