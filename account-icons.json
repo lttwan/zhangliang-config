@@ -1,6 +1,12 @@
 {
-  "version": 11,
+  "version": 12,
   "presets": [
-    { "name": "国家电网", "pinyin": "guojiadianwang", "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/guojiadianwang.svg", "type": 0, "group": "充值" }
+    {
+      "name": "国家电网",
+      "pinyin": "guojiadianwang",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/guojiadianwang.svg",
+      "type": 0,
+      "group": "充值帐户"
+    }
   ]
 }
