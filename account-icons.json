@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "presets": [
     {
       "name": "电费",
@@ -33,6 +33,13 @@
       "name": "公积金",
       "pinyin": "gongjijin",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/gongjijin.svg",
+      "type": 0,
+      "group": "现金账户"
+    },
+    {
+      "name": "医保",
+      "pinyin": "yibao",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/yibao.svg",
       "type": 0,
       "group": "现金账户"
     }
