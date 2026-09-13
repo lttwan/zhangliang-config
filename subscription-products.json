@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "products": [
+    {
+      "name": "Apple Music",
+      "pinyin": "applemusic",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/applemusic.svg"
+    },
+    {
+      "name": "QQ音乐",
+      "pinyin": "qqmusic",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/qqmusic.svg"
+    },
+    {
+      "name": "网易云音乐",
+      "pinyin": "netease",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/netease.svg"
+    },
+    {
+      "name": "酷狗音乐",
+      "pinyin": "kugou",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kugou.svg"
+    },
+    {
+      "name": "咪咕音乐",
+      "pinyin": "migu_music",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/migu_music.svg"
+    },
+    {
+      "name": "喜马拉雅",
+      "pinyin": "ximalaya",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/ximalaya.svg"
+    },
+    {
+      "name": "腾讯视频",
+      "pinyin": "tencent_video",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/tencent_video.svg"
+    },
+    {
+      "name": "优酷",
+      "pinyin": "youku",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/youku.svg"
+    },
+    {
+      "name": "哔哩哔哩",
+      "pinyin": "bilibili",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/bilibili.svg"
+    },
+    {
+      "name": "搜狐视频",
+      "pinyin": "sohu",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/sohu.svg"
+    },
+    {
+      "name": "乐视",
+      "pinyin": "letv",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/letv.svg"
+    },
+    {
+      "name": "芒果TV",
+      "pinyin": "mgtv",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/mgtv.svg"
+    },
+    {
+      "name": "咪咕视频",
+      "pinyin": "migu_video",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/migu_video.svg"
+    },
+    {
+      "name": "YouTube",
+      "pinyin": "youtube",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/youtube.svg"
+    },
+    {
+      "name": "Netflix",
+      "pinyin": "netflix",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/netflix.svg"
+    },
+    {
+      "name": "微信读书",
+      "pinyin": "weread",
+      "category": "书籍",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/weread.svg"
+    },
+    {
+      "name": "掌阅",
+      "pinyin": "zhangyue",
+      "category": "书籍",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/zhangyue.svg"
+    },
+    {
+      "name": "QQ阅读",
+      "pinyin": "qqread",
+      "category": "书籍",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/qqread.svg"
+    },
+    {
+      "name": "WPS",
+      "pinyin": "wps",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/wps.svg"
+    },
+    {
+      "name": "QQ文档",
+      "pinyin": "qqdoc",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/qqdoc.svg"
+    },
+    {
+      "name": "飞书",
+      "pinyin": "feishu",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/feishu.svg"
+    },
+    {
+      "name": "金山文档",
+      "pinyin": "kingsoft_doc",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kingsoft_doc.svg"
+    },
+    {
+      "name": "ChatGPT",
+      "pinyin": "chatgpt",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chatgpt.svg"
+    },
+    {
+      "name": "微软",
+      "pinyin": "microsoft",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/microsoft.svg"
+    },
+    {
+      "name": "印象笔记",
+      "pinyin": "yinxiang",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/yinxiang.svg"
+    },
+    {
+      "name": "钉钉",
+      "pinyin": "dingding",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/dingding.svg"
+    },
+    {
+      "name": "百度网盘",
+      "pinyin": "baidupan",
+      "category": "网盘",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/baidupan.svg"
+    },
+    {
+      "name": "迅雷",
+      "pinyin": "xunlei",
+      "category": "网盘",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/xunlei.svg"
+    }
+  ]
+}
