@@ -1,5 +1,5 @@
 {
-  "version": 25,
+  "version": 26,
   "presets": [
     {
       "name": "电费",
@@ -49,6 +49,34 @@
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/weilidai.svg",
       "type": 1,
       "group": "信用账户"
+    },
+    {
+      "name": "中国移动",
+      "pinyin": "chinamobile",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/chinamobile.svg",
+      "type": 0,
+      "group": "充值帐户"
+    },
+    {
+      "name": "中国联通",
+      "pinyin": "chinaunicom",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/chinaunicom.svg",
+      "type": 0,
+      "group": "充值帐户"
+    },
+    {
+      "name": "中国电信",
+      "pinyin": "chinatelecom",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/chinatelecom.svg",
+      "type": 0,
+      "group": "充值帐户"
+    },
+    {
+      "name": "中国广电",
+      "pinyin": "chinabroadcast",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/chinabroadcast.svg",
+      "type": 0,
+      "group": "充值帐户"
     }
   ]
 }
