@@ -1,5 +1,5 @@
 {
-  "version": 17,
+  "version": 18,
   "presets": [
     {
       "name": "电费",
@@ -34,7 +34,7 @@
       "pinyin": "gongjijin",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/gongjijin.svg",
       "type": 0,
-      "group": "资金账户"
+      "group": "现金账户"
     }
   ]
 }
