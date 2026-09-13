@@ -1,8 +1,8 @@
 {
-  "version": 12,
+  "version": 13,
   "presets": [
     {
-      "name": "国家电网",
+      "name": "电费",
       "pinyin": "guojiadianwang",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/guojiadianwang.svg",
       "type": 0,
