@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 20,
   "presets": [
     {
       "name": "电费",
@@ -42,6 +42,13 @@
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/yibao.svg",
       "type": 0,
       "group": "现金账户"
+    },
+    {
+      "name": "微粒贷",
+      "pinyin": "weilidai",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/weilidai.svg",
+      "type": 1,
+      "group": "信用账户"
     }
   ]
 }
