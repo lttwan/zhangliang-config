@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "products": [
     {
       "name": "Apple Music",
@@ -116,7 +116,7 @@
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/wps.svg"
     },
     {
-      "name": "QQ文档",
+      "name": "腾讯文档",
       "pinyin": "qqdoc",
       "category": "软件",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/qqdoc.svg"
