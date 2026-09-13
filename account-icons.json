@@ -1,10 +1,17 @@
 {
-  "version": 13,
+  "version": 14,
   "presets": [
     {
       "name": "电费",
       "pinyin": "guojiadianwang",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/guojiadianwang.svg",
+      "type": 0,
+      "group": "充值帐户"
+    },
+    {
+      "name": "饭卡",
+      "pinyin": "fanka",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/fanka.svg",
       "type": 0,
       "group": "充值帐户"
     }
