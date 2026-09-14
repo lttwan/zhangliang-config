@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "products": [
     {
       "name": "Apple Music",
@@ -216,6 +216,12 @@
       "pinyin": "huaweivideo",
       "category": "影视",
       "icon": "img:https://gitee.com/caesar131/zhangliang-config/raw/master/products/huaweivideo.png"
+    },
+    {
+      "name": "Kimi",
+      "pinyin": "kimi",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kimi.svg"
     }
   ]
 }
