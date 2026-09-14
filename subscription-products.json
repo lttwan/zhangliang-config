@@ -1,5 +1,5 @@
 {
-  "version": 17,
+  "version": 19,
   "products": [
     {
       "name": "Apple Music",
@@ -36,6 +36,18 @@
       "pinyin": "ximalaya",
       "category": "音乐",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/ximalaya.svg"
+    },
+    {
+      "name": "Spotify",
+      "pinyin": "spotify",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/spotify.svg"
+    },
+    {
+      "name": "华为音乐",
+      "pinyin": "huaweimusic",
+      "category": "音乐",
+      "icon": "img:https://gitee.com/caesar131/zhangliang-config/raw/master/products/huaweimusic.webp"
     },
     {
       "name": "腾讯视频",
@@ -92,6 +104,132 @@
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/netflix.svg"
     },
     {
+      "name": "Apple TV+",
+      "pinyin": "appletv",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/appletv.svg"
+    },
+    {
+      "name": "华为视频",
+      "pinyin": "huaweivideo",
+      "category": "影视",
+      "icon": "img:https://gitee.com/caesar131/zhangliang-config/raw/master/products/huaweivideo.png"
+    },
+    {
+      "name": "ChatGPT",
+      "pinyin": "chatgpt",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chatgpt.svg"
+    },
+    {
+      "name": "Kimi",
+      "pinyin": "kimi",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kimi.svg"
+    },
+    {
+      "name": "Cursor",
+      "pinyin": "cursor",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/cursor.svg"
+    },
+    {
+      "name": "TRAE",
+      "pinyin": "trae",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/trae.svg"
+    },
+    {
+      "name": "火山引擎",
+      "pinyin": "volcengine",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/volcengine.svg"
+    },
+    {
+      "name": "Spark",
+      "pinyin": "spark",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/spark.svg"
+    },
+    {
+      "name": "OpenClaw",
+      "pinyin": "openclaw",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/openclaw.svg"
+    },
+    {
+      "name": "DeepSeek",
+      "pinyin": "deepseek",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/deepseek.svg"
+    },
+    {
+      "name": "Claude",
+      "pinyin": "claude",
+      "category": "AI",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/claude.svg"
+    },
+    {
+      "name": "WPS",
+      "pinyin": "wps",
+      "category": "办公",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/wps.svg"
+    },
+    {
+      "name": "腾讯文档",
+      "pinyin": "qqdoc",
+      "category": "办公",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/qqdoc.svg"
+    },
+    {
+      "name": "飞书",
+      "pinyin": "feishu",
+      "category": "办公",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/feishu.svg"
+    },
+    {
+      "name": "金山文档",
+      "pinyin": "kingsoft_doc",
+      "category": "办公",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kingsoft_doc.svg"
+    },
+    {
+      "name": "印象笔记",
+      "pinyin": "yinxiang",
+      "category": "办公",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/yinxiang.svg"
+    },
+    {
+      "name": "钉钉",
+      "pinyin": "dingding",
+      "category": "办公",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/dingding.svg"
+    },
+    {
+      "name": "Adobe",
+      "pinyin": "adobe",
+      "category": "设计",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/adobe.svg"
+    },
+    {
+      "name": "Figma",
+      "pinyin": "figma",
+      "category": "设计",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/figma.svg"
+    },
+    {
+      "name": "微软",
+      "pinyin": "microsoft",
+      "category": "效率",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/microsoft.svg"
+    },
+    {
+      "name": "Notion",
+      "pinyin": "notion",
+      "category": "效率",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/notion.svg"
+    },
+    {
       "name": "微信读书",
       "pinyin": "weread",
       "category": "书籍",
@@ -108,54 +246,6 @@
       "pinyin": "qqread",
       "category": "书籍",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/qqread.svg"
-    },
-    {
-      "name": "WPS",
-      "pinyin": "wps",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/wps.svg"
-    },
-    {
-      "name": "腾讯文档",
-      "pinyin": "qqdoc",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/qqdoc.svg"
-    },
-    {
-      "name": "飞书",
-      "pinyin": "feishu",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/feishu.svg"
-    },
-    {
-      "name": "金山文档",
-      "pinyin": "kingsoft_doc",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kingsoft_doc.svg"
-    },
-    {
-      "name": "ChatGPT",
-      "pinyin": "chatgpt",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chatgpt.svg"
-    },
-    {
-      "name": "微软",
-      "pinyin": "microsoft",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/microsoft.svg"
-    },
-    {
-      "name": "印象笔记",
-      "pinyin": "yinxiang",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/yinxiang.svg"
-    },
-    {
-      "name": "钉钉",
-      "pinyin": "dingding",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/dingding.svg"
     },
     {
       "name": "百度网盘",
@@ -192,96 +282,6 @@
       "pinyin": "chinabroadcast",
       "category": "通信套餐",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chinabroadcast.svg"
-    },
-    {
-      "name": "Spotify",
-      "pinyin": "spotify",
-      "category": "音乐",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/spotify.svg"
-    },
-    {
-      "name": "Apple TV+",
-      "pinyin": "appletv",
-      "category": "影视",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/appletv.svg"
-    },
-    {
-      "name": "华为音乐",
-      "pinyin": "huaweimusic",
-      "category": "音乐",
-      "icon": "img:https://gitee.com/caesar131/zhangliang-config/raw/master/products/huaweimusic.webp"
-    },
-    {
-      "name": "华为视频",
-      "pinyin": "huaweivideo",
-      "category": "影视",
-      "icon": "img:https://gitee.com/caesar131/zhangliang-config/raw/master/products/huaweivideo.png"
-    },
-    {
-      "name": "Kimi",
-      "pinyin": "kimi",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kimi.svg"
-    },
-    {
-      "name": "Adobe",
-      "pinyin": "adobe",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/adobe.svg"
-    },
-    {
-      "name": "Figma",
-      "pinyin": "figma",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/figma.svg"
-    },
-    {
-      "name": "Notion",
-      "pinyin": "notion",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/notion.svg"
-    },
-    {
-      "name": "Cursor",
-      "pinyin": "cursor",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/cursor.svg"
-    },
-    {
-      "name": "TRAE",
-      "pinyin": "trae",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/trae.svg"
-    },
-    {
-      "name": "火山引擎",
-      "pinyin": "volcengine",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/volcengine.svg"
-    },
-    {
-      "name": "Spark",
-      "pinyin": "spark",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/spark.svg"
-    },
-    {
-      "name": "OpenClaw",
-      "pinyin": "openclaw",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/openclaw.svg"
-    },
-    {
-      "name": "DeepSeek",
-      "pinyin": "deepseek",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/deepseek.svg"
-    },
-    {
-      "name": "Claude",
-      "pinyin": "claude",
-      "category": "软件",
-      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/claude.svg"
     }
   ]
 }
