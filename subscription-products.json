@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 20,
   "products": [
     {
       "name": "Apple Music",
@@ -216,6 +216,12 @@
       "pinyin": "figma",
       "category": "设计",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/figma.svg"
+    },
+    {
+      "name": "剪映",
+      "pinyin": "jianying",
+      "category": "剪辑",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/jianying.svg"
     },
     {
       "name": "微软",
