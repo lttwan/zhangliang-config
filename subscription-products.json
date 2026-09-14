@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "products": [
     {
       "name": "Apple Music",
@@ -210,6 +210,12 @@
       "pinyin": "huaweimusic",
       "category": "音乐",
       "icon": "img:https://gitee.com/caesar131/zhangliang-config/raw/master/products/huaweimusic.webp"
+    },
+    {
+      "name": "华为视频",
+      "pinyin": "huaweivideo",
+      "category": "影视",
+      "icon": "img:https://gitee.com/caesar131/zhangliang-config/raw/master/products/huaweivideo.png"
     }
   ]
 }
