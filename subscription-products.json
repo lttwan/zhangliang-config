@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "products": [
     {
       "name": "Apple Music",
@@ -222,6 +222,66 @@
       "pinyin": "kimi",
       "category": "软件",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/kimi.svg"
+    },
+    {
+      "name": "Adobe",
+      "pinyin": "adobe",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/adobe.svg"
+    },
+    {
+      "name": "Figma",
+      "pinyin": "figma",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/figma.svg"
+    },
+    {
+      "name": "Notion",
+      "pinyin": "notion",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/notion.svg"
+    },
+    {
+      "name": "Cursor",
+      "pinyin": "cursor",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/cursor.svg"
+    },
+    {
+      "name": "TRAE",
+      "pinyin": "trae",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/trae.svg"
+    },
+    {
+      "name": "火山引擎",
+      "pinyin": "volcengine",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/volcengine.svg"
+    },
+    {
+      "name": "Spark",
+      "pinyin": "spark",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/spark.svg"
+    },
+    {
+      "name": "OpenClaw",
+      "pinyin": "openclaw",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/openclaw.svg"
+    },
+    {
+      "name": "DeepSeek",
+      "pinyin": "deepseek",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/deepseek.svg"
+    },
+    {
+      "name": "Claude",
+      "pinyin": "claude",
+      "category": "软件",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/claude.svg"
     }
   ]
 }
