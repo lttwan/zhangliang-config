@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "products": [
     {
       "name": "Apple Music",
@@ -192,6 +192,18 @@
       "pinyin": "chinabroadcast",
       "category": "通信套餐",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chinabroadcast.svg"
+    },
+    {
+      "name": "Spotify",
+      "pinyin": "spotify",
+      "category": "音乐",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/spotify.svg"
+    },
+    {
+      "name": "Apple TV+",
+      "pinyin": "appletv",
+      "category": "影视",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/appletv.svg"
     }
   ]
 }
