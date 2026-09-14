@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "products": [
     {
       "name": "Apple Music",
@@ -172,25 +172,25 @@
     {
       "name": "中国移动",
       "pinyin": "chinamobile",
-      "category": "套餐",
+      "category": "通信套餐",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chinamobile.svg"
     },
     {
       "name": "中国联通",
       "pinyin": "chinaunicom",
-      "category": "套餐",
+      "category": "通信套餐",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chinaunicom.svg"
     },
     {
       "name": "中国电信",
       "pinyin": "chinatelecom",
-      "category": "套餐",
+      "category": "通信套餐",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chinatelecom.svg"
     },
     {
       "name": "中国广电",
       "pinyin": "chinabroadcast",
-      "category": "套餐",
+      "category": "通信套餐",
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/products/chinabroadcast.svg"
     }
   ]
