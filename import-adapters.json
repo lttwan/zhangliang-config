@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": 10,
+  "version": 11,
   "adapters": [
     {
       "key": "qianji",
@@ -17,7 +17,6 @@
       "key": "bluecoins",
       "name": "Bluecoins",
       "extensions": [
-        ".tsv",
         ".csv"
       ],
       "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/bluecoins.js",
