@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": 4,
+  "version": 5,
   "adapters": [
     {
       "key": "qianji",
@@ -11,16 +11,6 @@
       "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/qianji.js",
       "sha256": "ef6fbf958c1ab3378820e2ec84b2222d83d4f6cf3d92381f4c7e8659711b3b00",
       "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/qianji.js.sig"
-    },
-    {
-      "key": "bluecoins",
-      "name": "Bluecoins",
-      "extensions": [
-        ".csv"
-      ],
-      "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/bluecoins.js",
-      "sha256": "9201c523a15306255d0dca32e84abac88a18417a6b5e8ff7062c6c2a0f008fa0",
-      "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/bluecoins.js.sig"
     }
   ]
 }
