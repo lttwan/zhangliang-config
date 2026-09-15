@@ -189,6 +189,12 @@ function parse(input) {
     out[9] = cell(r, 10);
     out[10] = convertTags(cell(r, 16));
     out[11] = mapMark(cell(r, 15), cell(r, 11));
+    // 非人民币账单：本应用目前仅支持人民币。
+    // 在「账单标记」列追加 外币:<币种>，由导入层识别为问题账单并跳过。
+    var currency = cell(r, 7).toUpperCase();
+    if (currency !== '' && currency !== 'CNY') {
+      out[11] = out[11] === '' ? '外币:' + currency : out[11] + '|外币:' + currency;
+    }
     out[12] = '';
     out[13] = cell(r, 18);
     result.push(out);
@@ -204,6 +210,10 @@ function parse(input) {
         feeRow[3] = '手续费';
         feeRow[6] = feeStr;
         feeRow[7] = cell(r, 8);
+        // 手续费随主账单币种，外币时同样标记为问题账单
+        if (currency !== '' && currency !== 'CNY') {
+          feeRow[11] = '外币:' + currency;
+        }
         feeRow[13] = origId;
         result.push(feeRow);
       }
