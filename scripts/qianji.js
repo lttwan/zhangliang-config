@@ -88,9 +88,15 @@ function cell(row, idx) {
 function mapType(type) {
   switch (type) {
     case '支出':
+      return '支出';
     case '收入':
-      return type;
+      return '收入';
+    case '退款':
+      return '退款';
     case '转账':
+      return '转账';
+    // 钱迹的「还款」在本应用中归入转账
+    case '还款':
       return '转账';
     case '债务-借入':
       return '周转-借入';
