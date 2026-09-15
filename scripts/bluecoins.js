@@ -60,6 +60,15 @@ function parseAmount(raw) {
   return { value: v, positive: positive };
 }
 
+/** 是否为形如 2026/9/15 或 2026-09-15 的日期 */
+function isDateLike(raw) {
+  var s = (raw || '').trim();
+  if (s === '') {
+    return false;
+  }
+  return /^\d{4}[\/-]\d{1,2}[\/-]\d{1,2}/.test(s);
+}
+
 /** 按分隔符解析表格文本（自动识别制表符/逗号），支持双引号包裹与转义 */
 function parseTable(text, delimiter) {
   var rows = [];
@@ -135,14 +144,70 @@ function detectDelimiter(text) {
   return tabs >= commas ? '\t' : ',';
 }
 
-/** 按表头名定位列下标 */
-function buildColumnIndex(header) {
-  var idx = {};
+/**
+ * 列名别名表：不同版本/语言设置导出的表头名不同，统一归一到语义字段。
+ *
+ * 已观察到的差异（同一软件不同版本）：
+ *   名称   / 标题        → title
+ *   类别组 / 类别分组名称 → categoryGroup
+ *   分组                  → 部分版本存在，语义接近标签分组，目前不单独使用
+ */
+var COLUMN_ALIASES = {
+  '类型': 'type',
+  '日期': 'date',
+  '设置时间': 'setTime',
+  '标题': 'title',
+  '名称': 'title',
+  '金额': 'amount',
+  '货币': 'currency',
+  '汇率': 'rate',
+  '类别组': 'categoryGroup',
+  '类别分组名称': 'categoryGroup',
+  '类别': 'category',
+  '账户': 'account',
+  '备注': 'note',
+  '分组': 'group',
+  '标签': 'tags',
+  '状态': 'status'
+};
+
+/** 无表头时的固定列序兜底（按各版本共有的前若干列） */
+var FALLBACK_ORDER = ['type', 'date', 'setTime', 'title', 'amount', 'currency',
+  'rate', 'categoryGroup', 'category', 'account', 'note', 'tags', 'status'];
+
+/**
+ * 由表头解析出「语义字段 → 列下标」映射。
+ *
+ * 无法识别任何关键列（type/date/amount）时返回 null，由调用方决定兜底策略。
+ */
+function resolveColumns(header) {
+  var col = {};
+  var recognized = 0;
   for (var i = 0; i < header.length; i++) {
-    var name = String(header[i] || '').trim();
-    idx[name] = i;
+    var raw = String(header[i] || '').trim();
+    var key = COLUMN_ALIASES[raw];
+    if (key === undefined) {
+      continue;
+    }
+    // 同名语义列只取首次出现，避免覆盖
+    if (col[key] === undefined) {
+      col[key] = i;
+      recognized++;
+    }
   }
-  return idx;
+  if (col['type'] === undefined && col['date'] === undefined && col['amount'] === undefined) {
+    return null;
+  }
+  return { col: col, recognized: recognized };
+}
+
+/** 无表头时按固定列序构造映射 */
+function fallbackColumns() {
+  var col = {};
+  for (var i = 0; i < FALLBACK_ORDER.length; i++) {
+    col[FALLBACK_ORDER[i]] = i;
+  }
+  return col;
 }
 
 function cell(row, index) {
@@ -227,9 +292,9 @@ function buildNote(name, note) {
  * Bluecoins 把一笔转账拆成两行，这三项在两行中相同。
  */
 function transferKey(row, col) {
-  return cell(row, col['日期']) + '\u0001'
-    + cell(row, col['名称']) + '\u0001'
-    + cell(row, col['备注']);
+  return cell(row, col['date']) + '\u0001'
+    + cell(row, col['title']) + '\u0001'
+    + cell(row, col['note']);
 }
 
 /**
@@ -244,7 +309,7 @@ function transferKey(row, col) {
 function groupTransferRows(rows, startRow, col) {
   var transferIndexes = [];
   for (var i = startRow; i < rows.length; i++) {
-    if (mapType(cell(rows[i], col['类型'])) === '转账') {
+    if (mapType(cell(rows[i], col['type'])) === '转账') {
       transferIndexes.push(i);
     }
   }
@@ -272,7 +337,7 @@ function groupTransferRows(rows, startRow, col) {
       if (used[bucket[b]]) {
         continue;
       }
-      var amount = parseAmount(cell(rows[bucket[b]], col['金额']));
+      var amount = parseAmount(cell(rows[bucket[b]], col['amount']));
       if (amount.positive) {
         positives.push(bucket[b]);
       } else {
@@ -306,21 +371,50 @@ function parse(input) {
   var text = input.text || '';
   var delimiter = detectDelimiter(text);
   var rows = parseTable(text, delimiter);
-  if (rows.length < 2) {
+  // 至少需要一行；有表头时实际的判定在下方（需要表头 + 至少一条数据）
+  if (rows.length === 0) {
     return { rows: result };
   }
 
-  var col = buildColumnIndex(rows[0]);
-  var hasHeader = col['日期'] !== undefined || col['金额'] !== undefined;
-  if (!hasHeader) {
-    // 无表头时按文档顺序兜底
-    col = {
-      '类型': 0, '日期': 1, '设置时间': 2, '名称': 3, '金额': 4, '货币': 5,
-      '汇率': 6, '类别组': 7, '类别': 8, '账户': 9, '备注': 10, '分组': 11,
-      '标签': 12, '状态': 13
-    };
+  var resolved = resolveColumns(rows[0]);
+  var col;
+  var startRow;
+  if (resolved !== null) {
+    col = resolved.col;
+    startRow = 1;
+    // key 列必须齐全，缺失会导致大量字段静默为空
+    if (col['type'] === undefined || col['date'] === undefined
+      || col['amount'] === undefined) {
+      return {
+        rows: result,
+        error: '表头缺少关键列（类型/日期/金额），请确认是 Bluecoins 导出文件'
+      };
+    }
+  } else {
+    // 认不出任何关键列：需区分「有表头但格式不符」与「本就没有表头」
+    var firstRow = rows[0];
+    var looksLikeData = false;
+    // 数据行的首列应是类型枚举或日期；表头行则不是
+    var firstCell = cell(firstRow, 0);
+    if (mapType(firstCell) === '支出' || mapType(firstCell) === '收入'
+      || mapType(firstCell) === '转账') {
+      looksLikeData = true;
+    }
+    if (isDateLike(cell(firstRow, 1))) {
+      looksLikeData = true;
+    }
+    if (!looksLikeData) {
+      // 表头存在但无法识别——直接报错，避免静默产出错乱数据
+      return {
+        rows: result,
+        error: '无法识别的表头：' + firstRow.slice(0, 4).join(' / ')
+          + '。请确认是 Bluecoins 导出文件，或反馈该表头以便适配'
+      };
+    }
+    // 确实没有表头：按固定列序兜底
+    col = fallbackColumns();
+    startRow = 0;
   }
-  var startRow = hasHeader ? 1 : 0;
 
   var transfer = groupTransferRows(rows, startRow, col);
   var used = transfer.used;
@@ -346,7 +440,7 @@ function parse(input) {
     for (var q = 0; q < idxList.length; q++) {
       rowList.push(rows[idxList[q]]);
     }
-    var type = mapType(cell(rowList[0], col['类型']));
+    var type = mapType(cell(rowList[0], col['type']));
     var built = buildRecord(type, rowList, col, seq + 1);
     if (built !== null) {
       seq++;
@@ -366,11 +460,11 @@ function buildRecord(type, rowList, col, seq) {
   var first = rowList[0];
   var second = rowList.length > 1 ? rowList[1] : null;
 
-  var dateRaw = cell(first, col['日期']);
+  var dateRaw = cell(first, col['date']);
   if (dateRaw === '') {
     return null;
   }
-  var amountInfo = parseAmount(cell(first, col['金额']));
+  var amountInfo = parseAmount(cell(first, col['amount']));
   if (isNaN(amountInfo.value)) {
     return null;
   }
@@ -380,8 +474,8 @@ function buildRecord(type, rowList, col, seq) {
   out[1] = normalizeDateTime(dateRaw);
   out[2] = '';
   out[3] = type;
-  out[9] = buildNote(cell(first, col['名称']), cell(first, col['备注']));
-  out[10] = convertTags(cell(first, col['标签']));
+  out[9] = buildNote(cell(first, col['title']), cell(first, col['note']));
+  out[10] = convertTags(cell(first, col['tags']));
   out[12] = '';
   out[13] = '';
 
@@ -389,13 +483,13 @@ function buildRecord(type, rowList, col, seq) {
     // 账户1 = 转出（金额为负的那行的账户），账户2 = 转入
     if (second !== null) {
       out[6] = amountInfo.value.toString();
-      out[7] = cell(first, col['账户']);
-      out[8] = cell(second, col['账户']);
+      out[7] = cell(first, col['account']);
+      out[8] = cell(second, col['account']);
     } else {
       // 单边转账：只保留已知账户，不臆造另一侧
       out[6] = amountInfo.value.toString();
-      out[7] = amountInfo.positive ? '' : cell(first, col['账户']);
-      out[8] = amountInfo.positive ? cell(first, col['账户']) : '';
+      out[7] = amountInfo.positive ? '' : cell(first, col['account']);
+      out[8] = amountInfo.positive ? cell(first, col['account']) : '';
     }
     // 转账在蓝色币中标为 (转账) 占位，清空以免生成无意义分类
     out[4] = '';
@@ -403,8 +497,8 @@ function buildRecord(type, rowList, col, seq) {
     return out;
   }
 
-  var catGroup = cell(first, col['类别组']);
-  var catSub = cell(first, col['类别']);
+  var catGroup = cell(first, col['categoryGroup']);
+  var catSub = cell(first, col['category']);
   // 部分记录会用括号包裹占位值，如 "(其它)"
   if (catGroup.indexOf('(') === 0) {
     catGroup = '';
@@ -415,7 +509,7 @@ function buildRecord(type, rowList, col, seq) {
   out[4] = catGroup;
   out[5] = catSub;
   out[6] = amountInfo.value.toString();
-  out[7] = cell(first, col['账户']);
+  out[7] = cell(first, col['account']);
   out[8] = '';
   return out;
 }
