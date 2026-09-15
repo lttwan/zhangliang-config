@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": 13,
+  "version": 14,
   "adapters": [
     {
       "key": "qianji",
@@ -22,7 +22,7 @@
       "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/bluecoins.js",
       "sha256": "63d89a22d427bb0ac615ecd8c3b2e32e9906c58383f8837de38f15dcdc969ab2",
       "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/bluecoins.js.sig",
-      "visible": false
+      "visible": true
     }
   ]
 }
