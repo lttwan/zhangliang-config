@@ -476,6 +476,13 @@ function buildRecord(type, rowList, col, seq) {
   out[3] = type;
   out[9] = buildNote(cell(first, col['title']), cell(first, col['note']));
   out[10] = convertTags(cell(first, col['tags']));
+  // 非人民币账单：本应用目前仅支持人民币。
+  // 在「账单标记」列写入 外币:<币种>，由导入层识别为问题账单并跳过，
+  // 提示用户暂不支持该币种。
+  var currency = cell(first, col['currency']).toUpperCase();
+  if (currency !== '' && currency !== 'CNY') {
+    out[11] = '外币:' + currency;
+  }
   out[12] = '';
   out[13] = '';
 
