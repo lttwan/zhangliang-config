@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "adapters": [
+    {
+      "key": "qianji",
+      "name": "钱迹",
+      "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/qianji.js",
+      "sha256": "0972803b2ff3c692f3d69b366a996514a155acb9cc56f2c86be1ed2e982e73ad",
+      "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/scripts/qianji.js.sig"
+    }
+  ]
+}
