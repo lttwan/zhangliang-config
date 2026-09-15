@@ -1,5 +1,5 @@
 {
-  "version": 32,
+  "version": 33,
   "presets": [
     {
       "name": "电费",
@@ -77,6 +77,13 @@
       "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/chinabroadcast.svg",
       "type": 0,
       "group": "充值帐户"
+    },
+    {
+      "name": "黄金",
+      "pinyin": "huangjin",
+      "icon": "svg:https://gitee.com/caesar131/zhangliang-config/raw/master/icons/huangjin.svg",
+      "type": 0,
+      "group": "投资理财账户"
     }
   ]
 }
