@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "files": [
+    {
+      "key": "engine",
+      "name": "识别引擎",
+      "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/engine.js",
+      "sha256": "a9a1fff6adb9ad742536dc9e67e580aa7464e1fe11ab92ab65fa620c64d56ca6",
+      "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/engine.js.sig"
+    },
+    {
+      "key": "platform-wechat",
+      "name": "版式规则：wechat",
+      "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/platforms/wechat.js",
+      "sha256": "ae29d7dc1eda1376162b1d06641d79351b943e3b66607137d467c80a6f238d32",
+      "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/platforms/wechat.js.sig"
+    }
+  ]
+}
