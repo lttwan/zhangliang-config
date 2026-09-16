@@ -85,15 +85,101 @@ function registerPlatform(rule) {
   PLATFORM_RULES.push(rule);
 }
 
+/**
+ * 组装备注。
+ *
+ * 版式声明 autoNote:false 时返回空串，由用户自行填写。
+ *
+ * @param goods 商品名
+ * @param merchant 商户名
+ */
+function noteOf(goods, merchant) {
+  if (activeRule !== null && activeRule.autoNote === false) {
+    return '';
+  }
+  return goods.length > 0 ? goods : merchant;
+}
+
 /** 表格标签的通用集合：两列版式中左列是标签，其右侧为值 */
 var TABLE_LABEL_TEXT = ['当前状态', '支付状态', '支付时间', '商品', '商户全称',
   '商户名称', '收单机构', '支付方式', '付款方式', '交易单号', '商户单号', '订单编号'];
+
+/**
+ * 「标签:值」内联版式中使用的分隔符。
+ *
+ * 中英文冒号都要支持——OCR 对手写体与印刷体的识别结果不稳定，
+ * 同一页面可能出现「支付方式:微信支付」与「支付方式：微信支付」两种。
+ */
+var INLINE_SEPARATORS = [':', '：'];
+
+/**
+ * 从一行文本中按内联标签取值。
+ *
+ * 适用于「支付方式:微信支付」「下单时间:2026-09-10 14:53:07」这类版式：
+ * 标签与值在同一行内，靠分隔符区分，而非左右两列。
+ *
+ * @param text 行文本
+ * @param label 标签名
+ * @returns 标签后的值；该行不含此标签时返回空串
+ */
+function inlineValueOf(text, label) {
+  if (label.length === 0) {
+    return '';
+  }
+  // 标签须在行首：避免「商品快照:发生交易争议」里的「商品」被误当标签
+  if (text.indexOf(label) !== 0) {
+    return '';
+  }
+  var rest = text.substring(label.length);
+  for (var i = 0; i < INLINE_SEPARATORS.length; i++) {
+    if (rest.indexOf(INLINE_SEPARATORS[i]) === 0) {
+      return rest.substring(INLINE_SEPARATORS[i].length).trim();
+    }
+  }
+  return '';
+}
+
+/**
+ * 在全部行中查找内联标签并取值。
+ *
+ * @returns 首个命中行的值；无则返回空串
+ */
+function findInlineValue(lines, label) {
+  if (label.length === 0) {
+    return '';
+  }
+  for (var i = 0; i < lines.length; i++) {
+    var v = inlineValueOf(lines[i].t, label);
+    if (v.length > 0) {
+      return v;
+    }
+  }
+  return '';
+}
+
+/** 取当前版式下某字段的内联标签名 */
+function inlineLabelOf(field, fallbacks) {
+  if (activeRule !== null && activeRule.inlineLabels !== undefined) {
+    var name = activeRule.inlineLabels[field];
+    if (name !== undefined && name.length > 0) {
+      return name;
+    }
+  }
+  return fallbacks.length > 0 ? fallbacks[0] : '';
+}
 
 /** 命中版式后置为对应规则，供各提取函数读取标签名 */
 var activeRule = null;
 
 /** 支付方式关键词：命中后取该名称作为账户 */
-var PAY_METHODS = ['零钱', '分付', '花呗', '银行卡', '信用卡', '余额宝', '云闪付'];
+/**
+ * 支付方式关键词。
+ *
+ * 顺序即优先级：「微信支付」须排在「微信」之前，否则会被更短的词截断；
+ * 同理「支付宝」排在「余额宝」之前。匹配时取首个命中项。
+ */
+var PAY_METHODS = ['微信支付', '零钱', '分付', '支付宝', '余额宝', '花呗', '借呗',
+  '银行卡', '信用卡', '云闪付', '现金'];
 
 /**
  * 分类关键词表（对应应用内置分类）。
@@ -214,7 +300,7 @@ function containsAny(text, words) {
  * 宁可误排一个商户候选，也不要把「账单服务」当成店名。
  */
 function isUiNoise(text) {
-  if (activeRule !== null) {
+  if (activeRule !== null && activeRule.uiNoise !== undefined) {
     for (var i = 0; i < activeRule.uiNoise.length; i++) {
       if (text === activeRule.uiNoise[i]) {
         return true;
@@ -224,6 +310,9 @@ function isUiNoise(text) {
   }
   for (var r = 0; r < PLATFORM_RULES.length; r++) {
     var words = PLATFORM_RULES[r].uiNoise;
+    if (words === undefined) {
+      continue;
+    }
     for (var j = 0; j < words.length; j++) {
       if (text === words[j]) {
         return true;
@@ -253,7 +342,7 @@ function isTableLabel(text) {
  * @param fallbacks 该字段的备选标签（不同平台叫法不同）
  */
 function labelOf(field, fallbacks) {
-  if (activeRule !== null) {
+  if (activeRule !== null && activeRule.labels !== undefined) {
     var name = activeRule.labels[field];
     if (name !== undefined && name.length > 0) {
       return name;
@@ -288,6 +377,14 @@ function findLine(lines, fragment) {
  * 坐标能有效排除它们。
  */
 function extractAmount(lines) {
+  // ① 内联锚点：如拼多多的「实付:26.8(免运费)」。
+  // 这类页面金额不带符号，且与标签同处一行，靠锚点词定位。
+  var anchorHit = extractInlineAmount(lines);
+  if (anchorHit.value.length > 0) {
+    return anchorHit;
+  }
+
+  // ② 带符号且居中、字号较大的独立金额行（微信支付详情页属此类）
   var best = null;
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i];
@@ -316,6 +413,52 @@ function extractAmount(lines) {
 }
 
 /**
+ * 按「实付 / 实付款 / 应付 / 合计」等内联锚点取金额。
+ *
+ * 拼多多等订单页的版式是「实付:26.8(免运费)」——金额与锚点同行、
+ * 不带符号、后面还可能跟括号说明。取锚点后的第一个金额数字即可，
+ * 括号内的说明（如「(免运费)」）不含金额，不会干扰。
+ *
+ * 「已优惠 / 共优惠 / 店铺优惠」这类是减免项，不是实付金额，需排除。
+ *
+ * @returns { value, negative, line }；未命中时 value 为空串
+ */
+function extractInlineAmount(lines) {
+  var none = { value: '', negative: false, line: null };
+  var anchors = ['实付款', '实付', '应付金额', '应付', '支付金额', '订单金额', '合计'];
+  var excludes = ['优惠', '已减', '共减', '立减', '折扣', '抵扣'];
+
+  for (var a = 0; a < anchors.length; a++) {
+    for (var i = 0; i < lines.length; i++) {
+      var text = lines[i].t;
+      if (text.indexOf(anchors[a]) !== 0) {
+        continue;
+      }
+      // 排除减免项：「秒杀后共优惠¥10」不该被当成实付
+      var excluded = false;
+      for (var e = 0; e < excludes.length; e++) {
+        if (text.indexOf(excludes[e]) >= 0) {
+          excluded = true;
+          break;
+        }
+      }
+      if (excluded) {
+        continue;
+      }
+      var m = text.match(/[¥￥]?\s*(\d+(?:\.\d{1,2})?)/);
+      if (m === null || m[1].length === 0) {
+        continue;
+      }
+      // 带负号（如「-¥10」）是减免，不是实付
+      var signIdx = text.indexOf('-');
+      var isNegative = signIdx >= 0 && signIdx < m.index;
+      return { value: m[1], negative: isNegative, line: lines[i] };
+    }
+  }
+  return none;
+}
+
+/**
  * 提取商品。
  *
  * 取「商品」行同一行右侧的值。该值在不同商户下有不同形态，需清洗：
@@ -324,15 +467,69 @@ function extractAmount(lines) {
  *  - 尾部残留的连接符与空白
  */
 function extractGoods(lines) {
+  // ① 两列版式：取「商品」标签行右侧的值
   var label = findLine(lines, labelOf('goods', ['商品', '交易内容']));
-  if (label === null) {
+  if (label !== null) {
+    var value = findValueOfRow(lines, label);
+    if (value !== null) {
+      var cleaned = cleanGoods(value.t);
+      if (cleaned.length > 0) {
+        return cleaned;
+      }
+    }
+  }
+  // ② 无标签版式（拼多多等）：店铺行下方的商品名
+  return extractGoodsNearShop(lines);
+}
+
+/**
+ * 从「店铺行下方的第一行」取商品名。
+ *
+ * 拼多多订单页无「商品」标签，商品名紧跟在店铺名下方：
+ *   沃之沃厨房用品旗舰店 旗舰店     ← 店铺行（含旗舰店等后缀）
+ *   沃之沃粘毛器滚筒斜撕式衣服床单   ← 商品名
+ *   卷纸滚刷头发神器黏毛清理多功能
+ *
+ * 商品名常跨多行，取第一行即可（第二行起是规格、赠品等细节）。
+ */
+function extractGoodsNearShop(lines) {
+  var markers = [];
+  if (activeRule !== null && activeRule.goodsMarkers !== undefined) {
+    markers = activeRule.goodsMarkers;
+  }
+  if (markers.length === 0) {
     return '';
   }
-  var value = findValueOfRow(lines, label);
-  if (value === null) {
-    return '';
+  for (var i = 0; i < lines.length; i++) {
+    var text = lines[i].t;
+    var isShop = false;
+    for (var m = 0; m < markers.length; m++) {
+      if (text.indexOf(markers[m]) >= 0) {
+        isShop = true;
+        break;
+      }
+    }
+    if (!isShop) {
+      continue;
+    }
+    // 取该行下方首个可用作商品名的行
+    for (var k = i + 1; k < lines.length && k <= i + 2; k++) {
+      var cand = lines[k].t;
+      if (cand.length < 4 || isUiNoise(cand)) {
+        continue;
+      }
+      // 价格行、规格行、退换货说明不是商品名
+      if (/^[¥￥]/.test(cand) || /^x\d+$/i.test(cand)) {
+        continue;
+      }
+      if (cand.indexOf('退货') >= 0 || cand.indexOf('包运费') >= 0) {
+        continue;
+      }
+      return cand.substring(0, 30);
+    }
+    break;
   }
-  return cleanGoods(value.t);
+  return '';
 }
 
 /** 清洗商品名 */
@@ -386,6 +583,12 @@ function cleanGoods(raw) {
  * 下方通常是品牌名。
  */
 function extractMerchant(lines, amountLine) {
+  // ① 店铺行优先：含「旗舰店 / 专营店」等后缀的行是最可靠的商户标识。
+  // 拼多多等订单页的金额行上方是收货信息，靠「金额行紧邻行」取不到店铺。
+  var shop = extractShopLine(lines);
+  if (shop.length > 0) {
+    return shop;
+  }
   if (amountLine === null) {
     return extractMerchantByFallback(lines);
   }
@@ -402,6 +605,36 @@ function extractMerchant(lines, amountLine) {
     var cand = candidates[i];
     if (isUsableMerchant(cand)) {
       return cand.t;
+    }
+  }
+  return '';
+}
+
+/**
+ * 取含店铺后缀的行作为商户名。
+ *
+ * 「沃之沃厨房用品旗舰店 旗舰店」这类行是订单页中最明确的商户标识，
+ * 比「金额行紧邻行」可靠——后者在订单页会取到收件人或地址。
+ *
+ * 同一行可能重复出现后缀（如「XX旗舰店 旗舰店」），需截断到首个完整店名。
+ */
+function extractShopLine(lines) {
+  var suffixes = ['旗舰店', '专营店', '专卖店', '官方店', '自营店', '官方旗舰店'];
+  for (var i = 0; i < lines.length; i++) {
+    var text = lines[i].t;
+    if (text.length < 3 || text.length > 40) {
+      continue;
+    }
+    for (var j = 0; j < suffixes.length; j++) {
+      var idx = text.indexOf(suffixes[j]);
+      if (idx <= 0) {
+        continue;
+      }
+      // 截到后缀结束处，丢掉其后重复的后缀
+      var name = text.substring(0, idx + suffixes[j].length);
+      if (name.length >= 3) {
+        return name;
+      }
     }
   }
   return '';
@@ -451,6 +684,16 @@ function isUsableMerchant(line) {
  * 坐标用于精确定位「同一行的右侧」，避免误取到其他行的日期。
  */
 function extractDate(lines, text) {
+  // ① 内联版式：如「下单时间:2026-09-10 14:53:07」
+  var inlineLabel = inlineLabelOf('time', ['下单时间', '支付时间', '交易时间', '付款时间']);
+  var inline = findInlineValue(lines, inlineLabel);
+  if (inline.length > 0) {
+    var di = normalizeDate(inline);
+    if (di.length > 0) {
+      return di;
+    }
+  }
+  // ② 两列版式：标签行右侧的值
   var label = findLine(lines, labelOf('time', ['支付时间', '交易时间', '付款时间', '创建时间']));
   if (label !== null) {
     var value = findValueOfRow(lines, label);
@@ -461,7 +704,7 @@ function extractDate(lines, text) {
       }
     }
   }
-  // 兜底：全文匹配
+  // ③ 兜底：全文匹配
   return normalizeDate(text);
 }
 
@@ -526,6 +769,16 @@ function normalizeDate(text) {
  * 按关键词截取。取不到时全文搜索支付方式关键词。
  */
 function extractPayMethod(lines, text) {
+  // ① 内联版式：如「支付方式:微信支付」
+  var inlineLabel = inlineLabelOf('payMethod', ['支付方式', '付款方式']);
+  var inline = findInlineValue(lines, inlineLabel);
+  if (inline.length > 0) {
+    var m = matchPayMethod(inline);
+    if (m.length > 0) {
+      return m;
+    }
+  }
+  // ② 两列版式
   var label = findLine(lines, labelOf('payMethod', ['支付方式', '付款方式']));
   if (label !== null) {
     var value = findValueOfRow(lines, label);
@@ -536,6 +789,7 @@ function extractPayMethod(lines, text) {
       }
     }
   }
+  // ③ 兜底：全文匹配
   return matchPayMethod(text);
 }
 
@@ -568,6 +822,22 @@ function matchPayMethod(text) {
  * 注意：本函数只得出分类名，用户分类库中是否存在同名分类由调用方判断。
  */
 function extractCategory(lines, merchant, goods, text) {
+  // 版式可限定匹配范围：电商标题（商品名）噪声大，误判率高，
+  // 此时只依据店铺名判断，避免「粘毛器…衣服床单」被判成衣服分类。
+  var scopeMode = activeRule !== null && activeRule.categoryScope !== undefined
+    ? activeRule.categoryScope : 'all';
+
+  if (scopeMode === 'merchant') {
+    if (merchant.length > 0) {
+      var mHit = matchCategory(merchant);
+      if (mHit.length > 0) {
+        return mHit;
+      }
+    }
+    // 店铺名未命中关键词时不再退到商品名——那正是需要规避的噪声来源
+    return '';
+  }
+
   var scope = '';
   if (merchant.length > 0) {
     scope = merchant;
@@ -651,7 +921,8 @@ function identifyPlatform(text) {
  * @returns 截断后的行；未识别版式或特征缺失时原样返回
  */
 function cutoffTail(lines) {
-  if (activeRule === null || activeRule.cutoffMarkers.length === 0) {
+  if (activeRule === null || activeRule.cutoffMarkers === undefined
+    || activeRule.cutoffMarkers.length === 0) {
     return lines;
   }
   var cutIndex = -1;
@@ -707,8 +978,10 @@ function parse(input) {
       accountName: payMethod,
       categoryName: category,
       merchant: merchant,
-      // 备注取商品（比商户名更能说明这笔钱花在哪）；无商品时退回商户名
-      note: goods.length > 0 ? goods : merchant
+      // 备注取商品（比商户名更能说明这笔钱花在哪）；无商品时退回商户名。
+      // 版式可声明 autoNote:false 关闭自动填充——电商标题冗长且含规格噪声，
+      // 强行填入反而干扰用户，交由记账时手填更合适。
+      note: noteOf(goods, merchant)
     };
   } catch (e) {
     return { error: String(e && e.message ? e.message : e) };
