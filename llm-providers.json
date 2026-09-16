@@ -3,11 +3,24 @@
   "providers": [
     {
       "name": "DeepSeek",
-      "endpoint": "https://api.deepseek.com/v1/chat/completions",
-      "models": ["deepseek-flash", "deepseek-v4-pro"],
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "models": [
+        "deepseek-flash",
+        "deepseek-v4-pro"
+      ],
       "thinking": {
-        "levels": ["off", "low", "high", "max"],
-        "labels": ["关闭", "低", "高", "最高"],
+        "levels": [
+          "off",
+          "low",
+          "high",
+          "max"
+        ],
+        "labels": [
+          "关闭",
+          "低",
+          "高",
+          "最高"
+        ],
         "fields": [
           {
             "field": "thinking",
@@ -22,7 +35,12 @@
           {
             "field": "reasoning_effort",
             "type": "string",
-            "values": ["", "", "high", "max"]
+            "values": [
+              "",
+              "",
+              "high",
+              "max"
+            ]
           }
         ]
       },
