@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "parser": {
+    "key": "local-parser",
+    "name": "账单识别规则",
+    "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/parser.js",
+    "sha256": "d04e718c9be20fb699b7d48b870cf042ee984f6d5a384f5a8e439ed11204b229",
+    "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/parser.js.sig"
+  }
+}
