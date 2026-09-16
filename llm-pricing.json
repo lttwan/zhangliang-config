@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "currency": "CNY",
+  "peakNote": "高峰时段：周一至周五 9:00-12:00、14:00-18:00；其余为空闲时段（空闲价约为高峰价的一半）",
+  "peakWindows": [
+    { "startHour": 9, "endHour": 12 },
+    { "startHour": 14, "endHour": 18 }
+  ],
+  "peakWeekdays": [1, 2, 3, 4, 5],
+  "rates": {
+    "deepseek-flash": {
+      "cachedIdle": 0.02,
+      "cachedPeak": 0.04,
+      "missIdle": 1,
+      "missPeak": 2,
+      "outputIdle": 4,
+      "outputPeak": 8
+    },
+    "deepseek-v4-pro": {
+      "cachedIdle": 0.15,
+      "cachedPeak": 0.30,
+      "missIdle": 4.5,
+      "missPeak": 9.0,
+      "outputIdle": 13.5,
+      "outputPeak": 27.0
+    }
+  }
+}
