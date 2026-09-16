@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "providers": [
     {
       "name": "DeepSeek",
@@ -42,9 +42,11 @@
               "max"
             ]
           }
-        ]
+        ],
+        "mode": "field"
       },
       "image": {
+        "mode": "content",
         "levels": [],
         "labels": [],
         "fields": []
