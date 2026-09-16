@@ -670,6 +670,14 @@ function isUsableMerchant(line) {
   if (/\d{10,}/.test(t)) {
     return false;
   }
+  // 优惠/减免类文案不是商户名：各平台的措辞不一（「共优惠」「秒杀后共优惠」
+  // 「店铺优惠」「已减」…），逐条罗列容易漏，按语义统一排除
+  var promoWords = ['优惠', '已减', '共减', '立减', '抵扣', '折扣', '省'];
+  for (var p = 0; p < promoWords.length; p++) {
+    if (t.indexOf(promoWords[p]) >= 0) {
+      return false;
+    }
+  }
   // 表格标签固定在最左列，排除
   if (line.l < VALUE_COLUMN_LEFT_MIN && t.length <= 4) {
     return false;

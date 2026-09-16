@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "version": 2,
+  "version": 3,
   "files": [
     {
       "key": "engine",
       "name": "识别引擎",
       "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/engine.js",
-      "sha256": "942229db75ee3e3635f24d3642f8a51d13767179beee6a7d88898efe266f5ef6",
+      "sha256": "68201324d42bd26f6c1fc71e9ac380e357076c01284d37c4389f562631553710",
       "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/engine.js.sig"
     },
     {
       "key": "platform-pinduoduo",
       "name": "版式规则：pinduoduo",
       "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/platforms/pinduoduo.js",
-      "sha256": "fe862b9864f8c2929a18b5a3e5031924830a6b03d5649ca48848e3970ebb75a5",
+      "sha256": "c977895d9121b76d3ebc0b0193e30ee5a39bc500049ac242734f66144b92ae11",
       "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/platforms/pinduoduo.js.sig"
     },
     {
