@@ -1,40 +1,36 @@
 {
-  "version": 3,
+  "version": 4,
   "providers": [
     {
       "name": "DeepSeek",
       "endpoint": "https://api.deepseek.com/v1/chat/completions",
-      "models": ["deepseek-v4-flash", "deepseek-v4-pro", "deepseek-v4-flash-vision-exp"]
-    },
-    {
-      "name": "通义千问",
-      "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
-      "models": ["qwen3.8-flash", "qwen3.7-plus", "qwen3.8-max", "qwen-plus", "qwen-turbo", "qwen-max", "qwen-long"]
-    },
-    {
-      "name": "豆包",
-      "endpoint": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
-      "models": ["doubao-seed-evolving-latest-version", "doubao-seed-2-1-pro-260628", "doubao-seed-2-1-turbo-260628", "doubao-seed-2-0-lite-260428", "doubao-seed-2-0-mini-260428", "glm-5-2-260617", "deepseek-v4-pro-260425", "deepseek-v4-flash-260425"]
-    },
-    {
-      "name": "Kimi",
-      "endpoint": "https://api.moonshot.cn/v1/chat/completions",
-      "models": ["kimi-k3", "kimi-k2.6", "kimi-k2.7-code", "kimi-k2.7-code-highspeed"]
-    },
-    {
-      "name": "智谱GLM",
-      "endpoint": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-      "models": ["glm-5.3", "glm-5.2", "glm-5.3-flash", "glm-4.7-flash", "glm-4.6v"]
-    },
-    {
-      "name": "硅基流动",
-      "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
-      "models": ["deepseek-ai/DeepSeek-V3.2", "Qwen/Qwen3.6-27B", "Pro/moonshotai/Kimi-K2.6", "Pro/zai-org/GLM-5.1"]
-    },
-    {
-      "name": "OpenAI",
-      "endpoint": "https://api.openai.com/v1/chat/completions",
-      "models": ["gpt-5.4-mini", "gpt-5.4", "gpt-5.5", "gpt-4.1-mini", "gpt-4o-mini"]
+      "models": ["deepseek-flash", "deepseek-v4-pro"],
+      "thinking": {
+        "levels": ["off", "low", "high", "max"],
+        "labels": ["关闭", "低", "高", "最高"],
+        "fields": [
+          {
+            "field": "thinking",
+            "type": "string",
+            "values": [
+              "{\"type\":\"disabled\"}",
+              "{\"type\":\"enabled\"}",
+              "{\"type\":\"enabled\"}",
+              "{\"type\":\"enabled\"}"
+            ]
+          },
+          {
+            "field": "reasoning_effort",
+            "type": "string",
+            "values": ["", "", "high", "max"]
+          }
+        ]
+      },
+      "image": {
+        "levels": [],
+        "labels": [],
+        "fields": []
+      }
     }
   ]
 }
