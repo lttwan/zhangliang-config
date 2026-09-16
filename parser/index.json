@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "version": 3,
+  "version": 4,
   "files": [
     {
       "key": "engine",
       "name": "识别引擎",
       "url": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/engine.js",
-      "sha256": "68201324d42bd26f6c1fc71e9ac380e357076c01284d37c4389f562631553710",
+      "sha256": "d737c6bfb7301582aba3ea8e5dbe4e65fe873ae5aac4bff8eb77f268de174a5e",
       "signatureUrl": "https://gitee.com/caesar131/zhangliang-config/raw/master/parser/engine.js.sig"
     },
     {

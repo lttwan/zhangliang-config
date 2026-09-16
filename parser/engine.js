@@ -592,14 +592,19 @@ function extractMerchant(lines, amountLine) {
   if (amountLine === null) {
     return extractMerchantByFallback(lines);
   }
-  var idx = lines.indexOf(amountLine);
+  // 按**坐标**取上下相邻行，而非数组下标。
+  // lines 按阅读顺序排列，同一视觉行的左右两块会占两个下标：
+  //   共优惠¥1        (l=0.021, tp=0.408)   ← 与下一项同一行，但在左侧
+  //   实付:¥29.57     (l=0.604, tp=0.406)   ← 金额行
+  // 若按下标取「上一行」会拿到同一行的左侧块，把优惠文案当成商户名。
   var candidates = [];
-  // 先看上方一行，再看下方一行
-  if (idx > 0) {
-    candidates.push(lines[idx - 1]);
+  var above = nearestAbove(lines, amountLine);
+  if (above !== null) {
+    candidates.push(above);
   }
-  if (idx + 1 < lines.length) {
-    candidates.push(lines[idx + 1]);
+  var below = nearestBelow(lines, amountLine);
+  if (below !== null) {
+    candidates.push(below);
   }
   for (var i = 0; i < candidates.length; i++) {
     var cand = candidates[i];
@@ -638,6 +643,49 @@ function extractShopLine(lines) {
     }
   }
   return '';
+}
+
+/**
+ * 取参照行**正上方**的最近一行（跳过同一视觉行的其他块）。
+ *
+ * 判定依据是纵向位置而非数组下标：只有当候选行的下边界在参照行
+ * 上边界之上（留出少量容差）时，才算「上一行」。
+ */
+function nearestAbove(lines, ref) {
+  var best = null;
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (line === ref) {
+      continue;
+    }
+    // 候选行必须在参照行上方
+    if (line.b > ref.tp + 0.002) {
+      continue;
+    }
+    if (best === null || line.tp > best.tp) {
+      best = line;
+    }
+  }
+  return best;
+}
+
+/** 取参照行正下方的最近一行（跳过同一视觉行的其他块） */
+function nearestBelow(lines, ref) {
+  var best = null;
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (line === ref) {
+      continue;
+    }
+    // 候选行必须在参照行下方
+    if (line.tp < ref.b - 0.002) {
+      continue;
+    }
+    if (best === null || line.tp < best.tp) {
+      best = line;
+    }
+  }
+  return best;
 }
 
 /** 兜底：取首个居中、非界面文案、长度合适的行 */
