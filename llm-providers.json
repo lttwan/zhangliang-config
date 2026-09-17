@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "providers": [
     {
       "name": "DeepSeek",
@@ -132,6 +132,83 @@
                 "values": [
                   "{\"type\":\"disabled\"}",
                   "{\"type\":\"enabled\"}"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "image": {
+        "mode": "content",
+        "levels": [],
+        "labels": [],
+        "fields": []
+      }
+    },
+    {
+      "name": "通义千问",
+      "endpoint": "https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/compatible-mode/v1/chat/completions",
+      "models": [
+        "qwen3.8-max",
+        "qwen3.8-flash",
+        "qwen3.7-plus",
+        "qwen3-max",
+        "qwen-plus",
+        "qwen-flash",
+        "qwen-turbo"
+      ],
+      "thinking": {
+        "mode": "field",
+        "groups": [
+          {
+            "models": [
+              "qwen3.8",
+              "qwen3.7"
+            ],
+            "levels": [
+              "low",
+              "medium",
+              "xhigh"
+            ],
+            "labels": [
+              "低",
+              "中",
+              "最高"
+            ],
+            "fields": [
+              {
+                "field": "reasoning_effort",
+                "type": "string",
+                "values": [
+                  "low",
+                  "medium",
+                  "xhigh"
+                ]
+              }
+            ]
+          },
+          {
+            "models": [
+              "qwen3-max",
+              "qwen-plus",
+              "qwen-flash",
+              "qwen-turbo"
+            ],
+            "levels": [
+              "off",
+              "on"
+            ],
+            "labels": [
+              "关闭",
+              "开启"
+            ],
+            "fields": [
+              {
+                "field": "enable_thinking",
+                "type": "boolean",
+                "values": [
+                  "false",
+                  "true"
                 ]
               }
             ]
