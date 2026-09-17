@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "providers": [
     {
       "name": "DeepSeek",
@@ -49,7 +49,10 @@
         "mode": "content",
         "levels": [],
         "labels": [],
-        "fields": []
+        "fields": [],
+        "unsupportedModels": [
+          "deepseek-v4-pro"
+        ]
       }
     }
   ]
