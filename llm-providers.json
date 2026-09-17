@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "providers": [
     {
       "name": "DeepSeek",
@@ -53,6 +53,96 @@
         "unsupportedModels": [
           "deepseek-v4-pro"
         ]
+      }
+    },
+    {
+      "name": "Kimi",
+      "endpoint": "https://api.moonshot.cn/v1/chat/completions",
+      "models": [
+        "kimi-k3",
+        "kimi-k2.6",
+        "kimi-k2.7-code",
+        "kimi-k2.7-code-highspeed"
+      ],
+      "thinking": {
+        "mode": "field",
+        "groups": [
+          {
+            "models": [
+              "kimi-k3"
+            ],
+            "levels": [
+              "low",
+              "high",
+              "max"
+            ],
+            "labels": [
+              "低",
+              "高",
+              "最高"
+            ],
+            "fields": [
+              {
+                "field": "reasoning_effort",
+                "type": "string",
+                "values": [
+                  "low",
+                  "high",
+                  "max"
+                ]
+              }
+            ]
+          },
+          {
+            "models": [
+              "kimi-k2.7-code"
+            ],
+            "levels": [
+              "on"
+            ],
+            "labels": [
+              "开启"
+            ],
+            "fields": [
+              {
+                "field": "thinking",
+                "type": "string",
+                "values": [
+                  "{\"type\":\"enabled\"}"
+                ]
+              }
+            ]
+          },
+          {
+            "models": [
+              "kimi-k2.6"
+            ],
+            "levels": [
+              "off",
+              "on"
+            ],
+            "labels": [
+              "关闭",
+              "开启"
+            ],
+            "fields": [
+              {
+                "field": "thinking",
+                "type": "string",
+                "values": [
+                  "{\"type\":\"disabled\"}",
+                  "{\"type\":\"enabled\"}"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "image": {
+        "mode": "content",
+        "levels": [],
+        "labels": [],
+        "fields": []
       }
     }
   ]
